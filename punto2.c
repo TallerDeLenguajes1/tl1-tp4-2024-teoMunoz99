@@ -64,7 +64,8 @@ int generarID(Nodo *inicio) {
     if (aux->Siguiente == NULL) {
         return 1000;
     } else {
-        // Buscar el último nodo en la lista
+        // Busco el último nodo en la lista
+        // falta ver cual es el mayor id
         while (aux->Siguiente != NULL) {
             aux = aux->Siguiente;
         }
@@ -88,13 +89,20 @@ Tarea crearTarea(Nodo *inicio) {
     return tNueva;
 }
 
-void cargarTarea(Nodo *inicio);
-void cargarTarea(Nodo *inicio) {
+void cargarTarea(Nodo **inicio);
+void cargarTarea(Nodo **inicio) {
     int opcion;  // variable bandera para salir del bucle
     do {
-        Tarea tNueva = crearTarea(inicio);
+        Tarea tNueva = crearTarea(*inicio);
         Nodo *nodoNuevo = CrearNodo(tNueva);
-        insertarUltimo(inicio, nodoNuevo);
+        //Verifico si inicio es null
+        if(*inicio == NULL){
+            //si es null apunto inicio al nodo nuevo
+            *inicio = nodoNuevo;
+        }else{
+            //si no es null agrego la tarea al ultimo
+            insertarUltimo(*inicio, nodoNuevo);
+        }
 
         printf("\nDesea cargar otra tarea? Ingrese 1 o 2");
         printf("\n1-SI");
@@ -105,15 +113,21 @@ void cargarTarea(Nodo *inicio) {
 
 void mostrarTareas(Nodo *inicio);
 void mostrarTareas(Nodo *inicio) {
+    if(inicio == NULL){
+        printf("\nNo hay tareas para mostrar\n");
+        return;
+    }
     Nodo *aux = inicio;
     while (aux->Siguiente) {
         printf("\n-Tarea ID: %d", aux->T.TareaID);
+        aux = aux->Siguiente;
     }
 }
 
 int main() {
     Nodo *tareasPendientes = CrearListaVacia();
     Nodo *tareasRealizadas = CrearListaVacia();
-    cargarTarea(tareasPendientes);
+    cargarTarea(&tareasPendientes);
+    mostrarTareas(tareasPendientes);
     return 0;
 }
