@@ -86,11 +86,18 @@ Tarea crearTarea(Nodo *inicio) {
 
 void cargarTarea(Nodo *inicio);
 void cargarTarea(Nodo *inicio){
-    int opcion=0;//variable bandera para salir del bucle
+    int opcion;//variable bandera para salir del bucle
     do
     {
-        /* code */
-    } while (opcion != 0);
+        Tarea tNueva = crearTarea(inicio);
+        Nodo *nodoNuevo = CrearNodo(tNueva);
+        insertarUltimo(inicio,nodoNuevo);
+
+        printf("\nDesea cargar otra tarea? Ingrese 1 o 2");
+        printf("\n1-SI");
+        printf("\n2-NO");
+        scanf("%d", &opcion);
+    } while (opcion != 2);
 }
 
 int main() {
