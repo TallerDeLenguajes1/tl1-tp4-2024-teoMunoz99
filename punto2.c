@@ -67,8 +67,15 @@ void mostrarLista(Nodo *inicio) {
 
 void cargarTarea(Nodo **inicio);
 void cargarTarea(Nodo **inicio){
-    Nodo * nAux = crearNodo();
-    insertarNodo(inicio,nAux);
+    int opcion;
+    do
+    {
+        Nodo * nAux = crearNodo();
+        insertarNodo(inicio,nAux);
+        printf("\n-Desea cargar otra tarea? 1-SI | 2-NO (ingrese 1 o 2): ");
+        scanf("%d", &opcion);
+    } while (opcion != 2);
+    
 }
 
 int main(int argc, char * argv[]){
