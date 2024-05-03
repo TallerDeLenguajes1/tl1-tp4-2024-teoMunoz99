@@ -45,13 +45,37 @@ Nodo * crearNodo(){
     return aux;
 }
 
+//--Funcion para insertar nodo, al comienzo de la lista
+void insertarNodo(Nodo **inicio, Nodo * nuevoNodo);
+void insertarNodo(Nodo **inicio, Nodo * nuevoNodo){
+    nuevoNodo->Siguiente = *inicio;
+    *inicio = nuevoNodo;
+}
+
+//--Funcion para mostrar una lista
+void mostrarLista(Nodo *inicio);
+void mostrarLista(Nodo *inicio) {
+    Nodo *actual = inicio;
+    while (actual != NULL) {
+        printf("Tarea ID: %d\n", actual->T.TareaID);
+        printf("Descripcion: %s\n", actual->T.Descripcion);
+        printf("Duracion: %d\n", actual->T.Duracion);
+        printf("-------------------------\n");
+        actual = actual->Siguiente;
+    }
+}
+
+void cargarTarea(Nodo **inicio);
+void cargarTarea(Nodo **inicio){
+    Nodo * nAux = crearNodo();
+    insertarNodo(inicio,nAux);
+}
+
 int main(int argc, char * argv[]){
 
     Nodo * tareasPendientes = CrearListaVacia();
-    Nodo * nodo1 = crearNodo();
-    printf("\n %s \n", nodo1->T.Descripcion);
-    printf("\n %d \n", nodo1->T.Duracion);
-    printf("\n %d \n", nodo1->T.TareaID);
+    cargarTarea(&tareasPendientes);
+    mostrarLista(tareasPendientes);
 
     return 0;
 }
