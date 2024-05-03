@@ -36,11 +36,22 @@ Tarea crearTarea(){
     return aux;
 }
 
+//--Funcion que devuelve un nodo
+Nodo * crearNodo();
+Nodo * crearNodo(){
+    Nodo * aux = (Nodo *)malloc(sizeof(Nodo));
+    aux->T = crearTarea();
+    aux->Siguiente = NULL;
+    return aux;
+}
+
 int main(int argc, char * argv[]){
 
     Nodo * tareasPendientes = CrearListaVacia();
-    Tarea aux = crearTarea();
-    printf("\n %s \n", aux.Descripcion);
+    Nodo * nodo1 = crearNodo();
+    printf("\n %s \n", nodo1->T.Descripcion);
+    printf("\n %d \n", nodo1->T.Duracion);
+    printf("\n %d \n", nodo1->T.TareaID);
 
     return 0;
 }
